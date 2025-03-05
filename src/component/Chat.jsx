@@ -1,8 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
-import { addDoc , collection } from 'firebase/firestore'
-import { db } from '../firebase-config'
-const Chat = () => {
+import { addDoc , collection ,serverTimestamp } from 'firebase/firestore'
+import { db ,auth } from '../firebase-config'
+import '../styles/Style.css'; 
+
+const Chat = (props) => {
+    const {room} = props ; 
     const [newMassage, setNewMassage] = useState("")
     const messageRef = collection(db , 'massages') 
     const handleSubmit = async (e) =>{ 
@@ -10,7 +13,12 @@ const Chat = () => {
       
         if(newMassage === "") return  ; 
          
-        await addDoc()
+        await addDoc(messageRef ,{
+            text : newMassage , 
+            createdAt : serverTimestamp(),
+            user : auth.currentUser.displayName ,
+             room , 
+        })
     }
   return (
     <div className='chat-app'>
