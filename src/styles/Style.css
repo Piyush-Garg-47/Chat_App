@@ -48,7 +48,21 @@
 
 .new-massage-input{
     flex: 1;
-    border:none ; 
+    border: none;
     outline: none;
-    background-color: transparent;
+    background: transparent;
+    font-size: 16px;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
 }
+
+.send-button {
+    border: none;
+    outline: none;
+    background: #3b5998;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50px;
+  }
