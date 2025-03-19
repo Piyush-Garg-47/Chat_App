@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { addDoc , collection ,serverTimestamp , onSnapshot, query, where } from 'firebase/firestore'
+import { addDoc , collection ,serverTimestamp , onSnapshot, query, where, orderBy } from 'firebase/firestore'
 import { db ,auth } from '../firebase-config'
 import '../styles/Style.css'; 
 
@@ -37,9 +37,15 @@ const Chat = (props) => {
     }
   return (
     <div className='chat-app'>
-        <div>{message.map((message) => <h1>{message.text} </h1> )}</div>
+    <div className='header'><h1>Welcome to : {room.toUpperCase()}</h1></div>
+        <div className='messages'>{message.map((message) => 
+          <div className='message' key={message.id}>
+              <span className='user'>{message.user} </span>
+              {message.text}
+          </div>
+       )}</div>
         <form onSubmit={handleSubmit} className='new-massage-form'> 
-            <input onChange={(e) =>setNewMassage(e.target.value)} className='new-massage-input' placeholder='type your massage here...'/>
+            <input value={newMassage} onChange={(e) =>setNewMassage(e.target.value)} className='new-massage-input' placeholder='type your massage here...'/>
             <button type='submit' className='send-button'>Send</button>
         </form> 
     </div>
